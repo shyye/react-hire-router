@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import Dashboard from './pages/Dashboard'
@@ -6,6 +6,19 @@ import PersonProfile from './pages/PersonProfile'
 
 export default function App() {
   const [hiredPeople, setHiredPeople] = useState([])
+  const [people, setPeople] = useState([])
+
+
+  const getData = async () => {
+    const res = await fetch('https://randomuser.me/api/?results=50');
+    const data = await res.json();
+    setPeople(data.results);
+  }
+
+  // Load data
+  useEffect(() => {
+    getData()
+  }, [])
 
   return (
     <>
@@ -20,11 +33,11 @@ export default function App() {
       <Routes>
         <Route 
           path="/"
-          element={<Dashboard hiredPeople={hiredPeople} />}
+          element={<Dashboard hiredPeople={hiredPeople} people={people}/>}
         />
         <Route 
           path="/view/:id"
-          element={<PersonProfile />}
+          element={<PersonProfile people={people}/>}
         />
       </Routes>
     </>
