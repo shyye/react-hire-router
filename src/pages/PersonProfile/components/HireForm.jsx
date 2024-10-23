@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 function HireForm(props) {
   const { person, handleClickHirePerson } = props
   const [wage, setWage] = useState(0)
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
 
   
   function handleSubmit(event) {
@@ -13,7 +13,7 @@ function HireForm(props) {
     const personToHire = { ...person, wage: parseFloat(wage) };
     handleClickHirePerson(personToHire)
 
-    // navigate('/')
+    navigate('/')
     
   }
 
@@ -27,13 +27,14 @@ function HireForm(props) {
         onChange={e => setWage(e.target.value)}
         value={wage}
       />
-      <Link to="/">
+      {/* <Link to="/">
         <button type="submit" onClick={(e) => {handleSubmit(e, person)}}>Hire</button>
-        {/* <button type="submit" onClick={handleSubmit}>Hire</button> */}
-      </Link>
+        <button type="submit" onClick={handleSubmit}>Hire</button>
+      </Link> */}
       {/* <button type="submit" onClick={() => {handleSubmit}}>Hire</button> */}
 
       {/* <button type="submit" onClick={handleSubmit}>Hire</button> */}
+      <button type="submit">Hire</button>
     </form>
   )
 }
