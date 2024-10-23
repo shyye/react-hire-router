@@ -9,7 +9,7 @@ function PersonProfile(props) {
 
   useEffect(() => {
     if (id) {
-      const matchingPerson = people.find((p) => p.id.value === id)
+      const matchingPerson = people.find((p) => p.login.uuid === id)
       setPerson(matchingPerson)
     }
   }, [people, id])
