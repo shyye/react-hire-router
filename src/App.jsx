@@ -7,7 +7,7 @@ import PersonProfile from "./pages/PersonProfile";
 export default function App() {
   const [hiredPeople, setHiredPeople] = useState([]);
   const [people, setPeople] = useState([]);
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
 
   const getData = async () => {
     const res = await fetch("https://randomuser.me/api/?results=50");
@@ -22,11 +22,9 @@ export default function App() {
 
   function handleClickHirePerson(person) {
     event.preventDefault()
-    setHiredPeople([...hiredPeople, { id: person.login.uuid, person: person }]);
-
-    // navigate('/')
-
-    // console.log(hiredPeople);
+    // setHiredPeople([...hiredPeople, { id: person.login.uuid, person: person }]);
+    setHiredPeople([...hiredPeople, person]);
+    navigate('/')
   }
 
   useEffect(() => {
