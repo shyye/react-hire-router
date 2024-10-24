@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 function HireForm(props) {
-  const { person, handleClickHirePerson } = props
+  const { person, handleClickEditPerson } = props
   const [wage, setWage] = useState(0)
   
   function handleSubmit(event) {
@@ -11,9 +11,13 @@ function HireForm(props) {
       alert('Please enter a valid wage (can\'t be 0)')
       return      
     }
-    const personToHire = { ...person, wage: parseFloat(wage) };
-    handleClickHirePerson(personToHire) 
+    const personToEdit = { ...person, wage: parseFloat(wage) };
+    handleClickEditPerson(personToEdit)    
   }
+
+  useEffect(() => {
+    setWage(person.wage)
+  }, [person.wage])
 
   return (
     <form onSubmit={handleSubmit}>
@@ -25,7 +29,7 @@ function HireForm(props) {
         onChange={e => setWage(e.target.value)}
         value={wage}
       />
-      <button type="submit">Hire</button>
+      <button type="submit">Update</button>
     </form>
   )
 }

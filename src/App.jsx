@@ -27,6 +27,17 @@ export default function App() {
     navigate('/')
   }
 
+  function handleClickEditPerson(person) {
+    setHiredPeople(hiredPeople.map(hiredPerson => {
+      if (hiredPerson.login.uuid === person.login.uuid) {        
+        return person;
+      } else {
+        return hiredPerson;
+      }
+    }))
+    navigate('/')
+  }
+
   useEffect(() => {
     console.log(hiredPeople);
   }, [hiredPeople]);
@@ -52,6 +63,19 @@ export default function App() {
             <PersonProfile
               people={people}
               handleClickHirePerson={handleClickHirePerson}
+              hiredPeople={null}
+              isEdit={false}
+            />
+          }
+        />
+        <Route
+          path="/edit/:id"
+          element={
+            <PersonProfile
+              people={people}
+              handleClickEditPerson={handleClickEditPerson}
+              hiredPeople={hiredPeople}
+              isEdit={true}
             />
           }
         />
